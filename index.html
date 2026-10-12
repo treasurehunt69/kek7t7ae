@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MGIT Treasure Hunt · 4x4 Image Puzzle</title>
+  <title>MGIT Treasure Hunt · 3x3 Image Puzzle</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
 
@@ -213,18 +213,18 @@
       margin-bottom: 25px;
     }
 
-    /* 4x4 puzzle grid */
+    /* 3x3 puzzle grid */
     .puzzle-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 5px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
       justify-content: center;
       align-items: center;
       margin: 0 auto 16px;
       max-width: 340px;
       aspect-ratio: 1 / 1;
       background: rgba(0, 0, 0, 0.4);
-      padding: 6px;
+      padding: 8px;
       border-radius: 10px;
       border: 1px solid rgba(212, 175, 55, 0.4);
       box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
@@ -234,10 +234,10 @@
       aspect-ratio: 1 / 1;
       width: 100%;
       height: 100%;
-      border-radius: 5px;
+      border-radius: 6px;
       cursor: pointer;
       transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s;
-      background-size: 400% 400%;        /* 4x4 → 400% */
+      background-size: 300% 300%;        /* 3x3 → 300% */
       background-repeat: no-repeat;
       border: 1px solid rgba(212, 175, 55, 0.25);
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
@@ -377,7 +377,7 @@
       <div class="success-title">SOLVE THE PUZZLE</div>
 
       <div class="puzzle-box">
-        <div class="puzzle-grid" id="puzzleGrid" aria-label="4 by 4 sliding puzzle"></div>
+        <div class="puzzle-grid" id="puzzleGrid" aria-label="3 by 3 sliding puzzle"></div>
         <div class="puzzle-hint">
           Tap a tile next to the empty space to slide it · <span id="moveCounter">0</span> moves
         </div>
@@ -397,16 +397,16 @@
     // ============================================================
     //  CONFIGURATION
     //  Replace the IMAGE_URL with your actual image.
-    //  The image will be split into 16 tiles (4x4 grid).
+    //  The image will be split into 9 tiles (3x3 grid).
     // ============================================================
     const IMAGE_URL = "/image.jpg"; // ← YOUR IMAGE HERE
-    const GRID_SIZE = 4; // 4x4 = 16 tiles
+    const GRID_SIZE = 3; // 3x3 = 9 tiles
     const TOTAL_TILES = GRID_SIZE * GRID_SIZE;
 
     // ============================================================
     //  PUZZLE STATE
     // ============================================================
-    let tiles = [];          // array of tile indices (0 .. 15)
+    let tiles = [];          // array of tile indices (0 .. 8)
     let emptyIndex = TOTAL_TILES - 1; // bottom-right is the empty slot
     let moves = 0;
     let solved = false;
@@ -460,7 +460,7 @@
     //  PUZZLE INITIALIZATION
     // ============================================================
     function initPuzzle() {
-      // Create solved order [0, 1, 2, ..., 15]
+      // Create solved order [0, 1, 2, ..., 8]
       tiles = Array.from({ length: TOTAL_TILES }, (_, i) => i);
       emptyIndex = TOTAL_TILES - 1;
       moves = 0;
@@ -470,7 +470,7 @@
       nextBox.style.display = "none";
 
       // Shuffle the puzzle (guaranteed solvable — just random valid moves)
-      shufflePuzzle(80); // 80 random moves for 4x4 (enough to mix well)
+      shufflePuzzle(40); // 40 random moves for 3x3 (enough to mix well)
 
       renderPuzzle();
     }
